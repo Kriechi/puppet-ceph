@@ -75,14 +75,11 @@ define ceph::mon (
     }
 
     if $::operatingsystem == 'Ubuntu' {
-      $init = 'upstart'
       Service {
         name     => "ceph-mon-${id}",
-        # workaround for bug https://projects.puppetlabs.com/issues/23187
-        provider => 'init',
-        start    => "start ceph-mon id=${id}",
-        stop     => "stop ceph-mon id=${id}",
-        status   => "status ceph-mon id=${id}",
+        start    => "systemctl start ceph-mon",
+        stop     => "systemctl stop ceph-mon",
+        status   => "systemctl status ceph-mon",
       }
     } elsif ($::operatingsystem == 'Debian') or ($::osfamily == 'RedHat') {
       $init = 'sysvinit'
