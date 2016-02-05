@@ -100,6 +100,11 @@ exec /usr/bin/radosgw -c /etc/ceph/ceph.conf -n ${name}",
   $pkg_fastcgi = $::apache::params::mod_packages['fastcgi']
   if $ceph_apache_repo {
     case $::osfamily {
+      'Ubuntu': {
+        package { 'libapache2-mod-fastcgi':
+          ensure => installed,
+        }
+      }
       'Debian': {
         Apt::Source['ceph-fastcgi']
         -> Package[$pkg_fastcgi]
