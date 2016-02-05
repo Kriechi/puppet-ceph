@@ -104,13 +104,12 @@ define ceph::rgw (
 
   # service definition
   if $::operatingsystem == 'Ubuntu' {
-    $init = 'upstart'
+    $init = 'systemd'
     Service {
       name     => "radosgw-${name}",
-      provider => 'init',
-      start    => "start radosgw id=${name}",
-      stop     => "stop radosgw id=${name}",
-      status   => "status radosgw id=${name}",
+      start    => "systemctl start radosgw",
+      stop     => "systemctl stop radosgw",
+      status   => "systemctl status radosgw",
     }
   } elsif ($::operatingsystem == 'Debian') {
     $init = 'sysvinit'

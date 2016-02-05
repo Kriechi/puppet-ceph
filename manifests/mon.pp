@@ -75,6 +75,7 @@ define ceph::mon (
     }
 
     if $::operatingsystem == 'Ubuntu' {
+      $init = 'systemd'
       Service {
         name     => "ceph-mon-${id}",
         start    => "systemctl start ceph-mon",
