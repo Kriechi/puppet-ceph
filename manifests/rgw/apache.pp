@@ -105,10 +105,10 @@ exec /usr/bin/radosgw -c /etc/ceph/ceph.conf -n ${name}",
           ensure => installed,
         }
       }
-      'Debian': {
-        Apt::Source['ceph-fastcgi']
-        -> Package[$pkg_fastcgi]
-      }
+      # 'Debian': {
+      #   Apt::Source['ceph-fastcgi']
+      #   -> Package[$pkg_fastcgi]
+      # }
       'RedHat': {
         Yumrepo['ext-ceph-fastcgi']
         -> Package[$pkg_fastcgi]
